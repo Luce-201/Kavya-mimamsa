@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>खोज - Kavya-Mimamsa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fef9f3 0%, #fef3e2 100%);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+        
+        .nav {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .nav a {
+            color: #8B4513;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            border: 2px solid #8B4513;
+            border-radius: 8px;
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .result-card h3 {
+            margin: 0 0 10px 0;
+            color: #2563eb;
+        }
+        
+        .result-card h3 a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .result-meta {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #666;
+            font-size: 20px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>काव्य खोज</h1>
+    </div>
+    
+    <div class="nav">
+        <a href="/kavya-mimamsa/">← मुख्य पृष्ठ पर वापस जाएं</a>
+    </div>
+    
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="कविता, कवि, या शब्द खोजें..." />
+        </div>
+        
+        <div id="results"></div>
+    </div>
+    
+    <script>
+        // Database of poems (you'll manually add each poem here)
+        const poems = [
+            {
+                title: "सूरदास का पद",
+                author: "सूरदास",
+                language: "ब्रज",
+                url: "/kavya-mimamsa/poems/sample.html",
+                content: "मैया मोरी मैं नहीं माखन खायो भोलो मुख देखि"
+            },
+            {
+                title: "रामचरितमानस से चौपाई",
+                author: "तुलसीदास",
+                language: "अवधी",
+                url: "/kavya-mimamsa/poems/tulsidas-chaupai.html",
+                content: "मन वचन कर्म सुचि मोरे राम कृपा"
+            }
+            // Add more poems here as you create them
+        ];
+        
+        const searchInput = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('results');
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                resultsDiv.innerHTML = '';
+                return;
+            }
+            
+            const filtered = poems.filter(poem => 
+                poem.title.toLowerCase().includes(query) ||
+                poem.author.toLowerCase().includes(query) ||
+                poem.content.toLowerCase().includes(query) ||
+                poem.language.toLowerCase().includes(query)
+            );
+            
+            if (filtered.length === 0) {
+                resultsDiv.innerHTML = '<div class="no-results">कोई परिणाम नहीं मिला</div>';
+                return;
+            }
+            
+            resultsDiv.innerHTML = filtered.map(poem => `
+                <div class="result-card">
+                    <h3><a href="${poem.url}">${poem.title}</a></h3>
+                    <div class="result-meta">
+                        <strong>रचयिता:</strong> ${poem.author} | 
+                        <strong>भाषा:</strong> ${poem.language}
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
