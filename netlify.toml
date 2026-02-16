@@ -1,0 +1,6 @@
+[build]
+  command = "echo 'No build needed - using GitHub Pages'"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "18"
