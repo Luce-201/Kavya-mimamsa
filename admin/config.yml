@@ -2,9 +2,9 @@ backend:
   name: github
   repo: Luce-201/kavya-mimamsa
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
-
+  base_url: https://kavya-mimamsa.netlify.app
+  auth_endpoint: /.netlify/functions/github
+  
 media_folder: "assets/images"
 public_folder: "/kavya-mimamsa/assets/images"
 
