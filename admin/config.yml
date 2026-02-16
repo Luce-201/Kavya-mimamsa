@@ -2,9 +2,13 @@ backend:
   name: github
   repo: Luce-201/kavya-mimamsa
   branch: main
-  base_url: https://kavya-mimamsa.netlify.app
-  auth_endpoint: /.netlify/functions/github
-  
+  # Using GitHub OAuth directly
+  auth_type: pkce
+  app_id: "Iv1.0a54e0e3a35fe00a"
+
+# Use Decap CMS's built-in OAuth
+local_backend: true
+
 media_folder: "assets/images"
 public_folder: "/kavya-mimamsa/assets/images"
 
